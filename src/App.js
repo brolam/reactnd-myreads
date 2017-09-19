@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import BookShelfChanger from './components/BookShelfChanger.js';
 import BookShelfImage from './components/BookShelfImage.js';
+import BookShelf from './components/BookShelf.js';
 
 class BooksApp extends React.Component {
   state = {
@@ -14,13 +15,11 @@ class BooksApp extends React.Component {
     books: {},
     showSearchPage: false
   }
-
   componentDidMount() {
     this.props.booksAPI.getAll().then((books) => { this.setState({books})  })
   }
 
-
-  onBookShelfChange = () => {}
+  onChangeBookShelf = () => {}
   render() {
     return (
       <div className="app">
@@ -56,11 +55,12 @@ class BooksApp extends React.Component {
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
+                      <BookShelf book={ {id:"nggnmAEACAAJ", title: "The Linux Command Line", authors: ["William E. Shotts", "Breno Marques" ], subtitle:"A Complete Introduction", shelf:"currentlyReading"}} onChangeBookShelf={this.onChangeBookShelf} />
                       <li>
                         <div className="book">
                           <div className="book-top">
                             <BookShelfImage bookId="PGR2AwAAQBAJ" />
-                            <BookShelfChanger selectedOption="currentlyReading" onBookShelfChange={this.onBookShelfChange} />
+                            <BookShelfChanger selectedOption="currentlyReading" onChangeBookShelf={this.onChangeBookShelf} />
                           </div>
                           <div className="book-title">To Kill a Mockingbird</div>
                           <div className="book-authors">Harper Lee</div>
@@ -70,7 +70,7 @@ class BooksApp extends React.Component {
                         <div className="book">
                           <div className="book-top">
                             <BookShelfImage bookId="yDtCuFHXbAYC" />
-                            <BookShelfChanger selectedOption="currentlyReading" onBookShelfChange={this.onBookShelfChange}/>
+                            <BookShelfChanger selectedOption="currentlyReading" onChangeBookShelf={this.onChangeBookShelf}/>
                           </div>
                           <div className="book-title">Ender's Game</div>
                           <div className="book-authors">Orson Scott Card</div>
@@ -87,7 +87,7 @@ class BooksApp extends React.Component {
                         <div className="book">
                           <div className="book-top">
                             <BookShelfImage bookId="uu1mC6zWNTwC" />
-                            <BookShelfChanger selectedOption="wantToRead" onBookShelfChange={this.onBookShelfChange}/>
+                            <BookShelfChanger selectedOption="wantToRead" onChangeBookShelf={this.onChangeBookShelf}/>
                           </div>
                           <div className="book-title">1776</div>
                           <div className="book-authors">David McCullough</div>
@@ -97,7 +97,7 @@ class BooksApp extends React.Component {
                         <div className="book">
                           <div className="book-top">
                             <BookShelfImage bookId="wrOQLV6xB-wC"/>
-                            <BookShelfChanger selectedOption="wantToRead" onBookShelfChange={this.onBookShelfChange}/>
+                            <BookShelfChanger selectedOption="wantToRead" onChangeBookShelf={this.onChangeBookShelf}/>
                           </div>
                           <div className="book-title">Harry Potter and the Sorcerer's Stone</div>
                           <div className="book-authors">J.K. Rowling</div>
@@ -114,7 +114,7 @@ class BooksApp extends React.Component {
                         <div className="book">
                           <div className="book-top">
                             <BookShelfImage bookId="pD6arNyKyi8C" />
-                            <BookShelfChanger selectedOption="read" onBookShelfChange={this.onBookShelfChange} />
+                            <BookShelfChanger selectedOption="read" onChangeBookShelf={this.onChangeBookShelf} />
                           </div>
                           <div className="book-title">The Hobbit</div>
                           <div className="book-authors">J.R.R. Tolkien</div>
@@ -124,7 +124,7 @@ class BooksApp extends React.Component {
                         <div className="book">
                           <div className="book-top">
                             <BookShelfImage bookId="1q_xAwAAQBAJ"/>
-                            <BookShelfChanger selectedOption="read" onBookShelfChange={this.onBookShelfChange} />
+                            <BookShelfChanger selectedOption="read" onChangeBookShelf={this.onChangeBookShelf} />
                           </div>
                           <div className="book-title">Oh, the Places You'll Go!</div>
                           <div className="book-authors">Seuss</div>
@@ -134,7 +134,7 @@ class BooksApp extends React.Component {
                         <div className="book">
                           <div className="book-top">
                           <BookShelfImage bookId="32haAAAAMAAJ"/>
-                              <BookShelfChanger selectedOption="read" onBookShelfChange={this.onBookShelfChange} />
+                              <BookShelfChanger selectedOption="read" onChangeBookShelf={this.onChangeBookShelf} />
                           </div>
                           <div className="book-title">The Adventures of Tom Sawyer</div>
                           <div className="book-authors">Mark Twain</div>
