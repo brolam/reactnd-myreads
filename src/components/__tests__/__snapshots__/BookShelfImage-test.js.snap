@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div
+  className="book-cover"
+  style={
+    Object {
+      "backgroundImage": "url(\\"https://books.google.com/books/content?id=nggnmAEACAA&printsec=frontcover&img=1&zoom=1\\")",
+      "height": 190,
+      "width": 120,
+    }
+  }
+/>
+`;
