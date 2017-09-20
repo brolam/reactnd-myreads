@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Last Snapshot 1`] = `
+<div
+  className="bookshelf"
+>
+  <h2
+    className="bookshelf-title"
+  >
+    Currently Readin
+  </h2>
+  <div
+    className="bookshelf-books"
+  >
+    <ol
+      className="books-grid"
+    >
+      <li>
+        <div
+          className="book"
+        >
+          <div
+            className="book-top"
+          >
+            <div
+              className="book-cover"
+              style={
+                Object {
+                  "backgroundImage": "url(\\"https://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=1\\")",
+                  "height": 190,
+                  "width": 120,
+                }
+              }
+            />
+            <div
+              className="book-shelf-changer"
+            >
+              <select
+                onChange={[Function]}
+                value="currentlyReading"
+              >
+                <option
+                  disabled={true}
+                  value="none"
+                >
+                  Move to...
+                </option>
+                <option
+                  value="currentlyReading"
+                >
+                  Currently Reading
+                </option>
+                <option
+                  value="wantToRead"
+                >
+                  Want to Read
+                </option>
+                <option
+                  value="read"
+                >
+                  Read
+                </option>
+                <option
+                  value="none"
+                >
+                  None
+                </option>
+              </select>
+            </div>
+          </div>
+          <div
+            className="book-title"
+          >
+            The Linux Command Line
+          </div>
+          <div
+            className="book-authors"
+          >
+            William E. Shotts, 
+            Breno Marques 
+          </div>
+        </div>
+      </li>
+      <li>
+        <div
+          className="book"
+        >
+          <div
+            className="book-top"
+          >
+            <div
+              className="book-cover"
+              style={
+                Object {
+                  "backgroundImage": "url(\\"https://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1\\")",
+                  "height": 190,
+                  "width": 120,
+                }
+              }
+            />
+            <div
+              className="book-shelf-changer"
+            >
+              <select
+                onChange={[Function]}
+                value="currentlyReading"
+              >
+                <option
+                  disabled={true}
+                  value="none"
+                >
+                  Move to...
+                </option>
+                <option
+                  value="currentlyReading"
+                >
+                  Currently Reading
+                </option>
+                <option
+                  value="wantToRead"
+                >
+                  Want to Read
+                </option>
+                <option
+                  value="read"
+                >
+                  Read
+                </option>
+                <option
+                  value="none"
+                >
+                  None
+                </option>
+              </select>
+            </div>
+          </div>
+          <div
+            className="book-title"
+          >
+            To Kill a Mockingbird
+          </div>
+          <div
+            className="book-authors"
+          >
+            Harper Lee, 
+            Breno Marques 
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
+`;

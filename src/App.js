@@ -3,6 +3,7 @@ import './App.css'
 import BookShelfChanger from './components/BookShelfChanger.js';
 import BookShelfImage from './components/BookShelfImage.js';
 import BookShelf from './components/BookShelf.js';
+import BookShelfList from './components/BookShelfList.js';
 
 class BooksApp extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    books: {},
+    books: [],
     showSearchPage: false
   }
   componentDidMount() {
@@ -51,11 +52,12 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
+               <BookShelfList listTitle="Currently Readin" books={this.state.books} onChangeBookShelf={this.onChangeBookShelf} />
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      <BookShelf book={ {id:"nggnmAEACAAJ", title: "The Linux Command Line", authors: ["William E. Shotts", "Breno Marques" ], subtitle:"A Complete Introduction", shelf:"currentlyReading"}} onChangeBookShelf={this.onChangeBookShelf} />
+                      <BookShelf book={ {id:"nggnmAEACAAJ", title: "The Linux Command Line", authors: ["William E. Shotts", "Breno Marques" ], shelf:"currentlyReading"}} onChangeBookShelf={this.onChangeBookShelf} />
                       <li>
                         <div className="book">
                           <div className="book-top">

@@ -30,10 +30,10 @@ BookShelf.propTypes = {
     book: PropTypes.shape({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        subtitle: PropTypes.string.isRequired,
         authors: PropTypes.array.isRequired,
         shelf: PropTypes.string.isRequired,
-    })
+    }),
+    onChangeBookShelf: PropTypes.func.isRequired
 }
 
 export default BookShelf
