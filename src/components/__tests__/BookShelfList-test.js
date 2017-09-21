@@ -23,10 +23,10 @@ test('renders without crashing', () => {
     ReactDOM.render(<BookShelfList listTitle="Currently Readin" books={books} onChangeBookShelf={onChangeBookShelf} />, div)
 })
 
-test('renders 2 book', () => {
-    const app = mount(<BookShelfList listTitle="Currently Readin" books={books} onChangeBookShelf={onChangeBookShelf} />);
-    const innerNode = app.find('.book');
-    expect(innerNode.length).toEqual(2);
+test('renders 2 books', () => {
+    const bookShelfList = mount(<BookShelfList listTitle="Currently Readin" books={books} onChangeBookShelf={onChangeBookShelf} />);
+    const booksOnTheShelf = bookShelfList.find('.book');
+    expect(booksOnTheShelf.length).toEqual(2);
   })
 
 test('Last Snapshot', () => {
