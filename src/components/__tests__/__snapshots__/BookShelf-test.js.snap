@@ -22,6 +22,7 @@ exports[`Last Snapshot 1`] = `
         className="book-shelf-changer"
       >
         <select
+          id="nggnmAEACAAJ"
           onChange={[Function]}
           value="currentlyReading"
         >

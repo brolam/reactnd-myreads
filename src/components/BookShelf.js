@@ -11,7 +11,7 @@ class BookShelf extends React.Component {
                 <div className="book">
                     <div className="book-top">
                         <BookShelfImage bookId={book.id} />
-                        <BookShelfChanger selectedOption={book.shelf} onChangeBookShelf={onChangeBookShelf} />
+                        <BookShelfChanger bookId={book.id} selectedOption={book.shelf} onChangeBookShelf={onChangeBookShelf} />
                     </div>
                     <div className="book-title">{book.title}</div>
                     <div className="book-authors">
