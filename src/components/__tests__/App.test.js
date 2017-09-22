@@ -4,8 +4,14 @@ import App from '../../App.js'
 import { mount } from 'enzyme';
 
 const BooksAPIMock = {}
+let wasBooksApiUpdateCalled = {};
 BooksAPIMock.getAll = () => new Promise(function (then) {
   then(books);
+});
+
+BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
+  wasBooksApiUpdateCalled = {id:"nggnmAEACAAJ", shelf:"read"};
+  then(wasBooksApiUpdateCalled);
 });
 
 it('renders without crashing', () => {
@@ -36,6 +42,15 @@ test('renders 2 books per BookShelfList', () => {
   expect(shelfCurrentlyReading.find('.book').length).toEqual(2);
   expect(shelfWantToRead.find('.book').length).toEqual(2);
   expect(shelfRead.find('.book').length).toEqual(2);
+})
+
+test('Call BooksAPI Update method', () => {
+  const app = mount(<App booksAPI={BooksAPIMock} />);
+  app.setState({ books: books });
+  const bookShelfChanger = app.find('select [id="nggnmAEACAAJ"]'); //The Linux Command Line Book's
+  bookShelfChanger.node.value = "read";
+  bookShelfChanger.simulate('change');
+  expect(wasBooksApiUpdateCalled).toEqual({id:"nggnmAEACAAJ", shelf:"read"});
 })
 
 const books = [{

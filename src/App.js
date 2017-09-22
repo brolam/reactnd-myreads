@@ -10,7 +10,11 @@ class BooksApp extends React.Component {
   componentDidMount() {
     this.props.booksAPI.getAll().then((books) => { this.setState({ books }) })
   }
-  onChangeBookShelf = () => { }
+  onChangeBookShelf = (e) => {
+    const { bookId, shelf } = [e.target.id, e.target.value];
+    const book = { id: bookId };
+    this.props.booksAPI.update(book, shelf);
+  }
   getBooksOnTheShelf(shelf, books) {
     return books.filter((book) => (book.shelf === shelf))
   }
