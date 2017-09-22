@@ -41,10 +41,10 @@ test('renders 6 books', () => {
 test('renders 2 books per BookShelfList', () => {
   const app = mount(<App booksAPI={BooksAPIMock} />);
   app.setState({ books: books });
-  const shelfs = app.find('.bookshelf');
-  const shelfCurrentlyReading = shelfs.first();
-  const shelfWantToRead = shelfs.at(1)
-  const shelfRead = shelfs.at(2);
+  const shelves = app.find('.bookshelf');
+  const shelfCurrentlyReading = shelves.first();
+  const shelfWantToRead = shelves.at(1)
+  const shelfRead = shelves.at(2);
   expect(shelfCurrentlyReading.find('.book').length).toEqual(2);
   expect(shelfWantToRead.find('.book').length).toEqual(2);
   expect(shelfRead.find('.book').length).toEqual(2);
@@ -53,9 +53,9 @@ test('renders 2 books per BookShelfList', () => {
 test('Call BooksAPI Update method', () => {
   const testChangeCurrentlyReadingToRead = (app) => {
     app.update();
-    const shelfs = app.find('.bookshelf');
-    const shelfCurrentlyReading = shelfs.first();
-    const shelfRead = shelfs.at(2);
+    const shelves = app.find('.bookshelf');
+    const shelfCurrentlyReading = shelves.first();
+    const shelfRead = shelves.at(2);
     expect(shelfCurrentlyReading.find('.book').length).toEqual(1);
     expect(shelfRead.find('.book').length).toEqual(3);
   }
