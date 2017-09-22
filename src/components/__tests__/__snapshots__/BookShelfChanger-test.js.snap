@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Last Snapshot 1`] = `
+<div
+  className="book-shelf-changer"
+>
+  <select
+    id="nggnmAEACAA"
+    onChange={[Function]}
+    value="none"
+  >
+    <option
+      disabled={true}
+      value="none"
+    >
+      Move to...
+    </option>
+    <option
+      value="currentlyReading"
+    >
+      Currently Reading
+    </option>
+    <option
+      value="wantToRead"
+    >
+      Want to Read
+    </option>
+    <option
+      value="read"
+    >
+      Read
+    </option>
+    <option
+      value="none"
+    >
+      None
+    </option>
+  </select>
+</div>
+`;

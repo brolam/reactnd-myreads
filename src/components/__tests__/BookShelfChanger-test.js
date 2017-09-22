@@ -2,6 +2,7 @@ import React from 'react';
 import BookShelfChanger from '../BookShelfChanger.js';
 import { mount } from 'enzyme';
 import ReactDOM from 'react-dom';
+import renderer from 'react-test-renderer';
 
 const onChangeBookShelf = () => { }
 
@@ -51,3 +52,11 @@ test('simulate change option', () => {
     testOnSelectOption("read");
     testOnSelectOption("none");
 });
+
+test('Last Snapshot', () => {
+    const bookShelfChanger = renderer.create(
+        <BookShelfChanger bookId="nggnmAEACAA" selectedOption="none" onChangeBookShelf={onChangeBookShelf} />
+    );
+    let tree = bookShelfChanger.toJSON();
+    expect(tree).toMatchSnapshot();
+})
