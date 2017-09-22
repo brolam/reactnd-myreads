@@ -7,16 +7,30 @@ class BooksApp extends React.Component {
     books: [],
     showSearchPage: false
   }
-  componentDidMount() {
+  updateAllShelves() {
     this.props.booksAPI.getAll().then((books) => { this.setState({ books }) })
   }
+  componentDidMount() {
+    this.updateAllShelves();
+  }
   onChangeBookShelf = (e) => {
-    const { bookId, shelf } = [e.target.id, e.target.value];
+    const bookId = e.target.id;
+    const shelf = e.target.value;
     const book = { id: bookId };
-    this.props.booksAPI.update(book, shelf);
+    this.props.booksAPI.update(book, shelf).then((result) => { this.doChangeBookShelf(result) });
+    this.updateAllShelves();
   }
   getBooksOnTheShelf(shelf, books) {
     return books.filter((book) => (book.shelf === shelf))
+  }
+  doChangeBookShelf(booksAPIResult) {
+    const books = this.state.books;
+    for (const book of books) {
+      if (book.id === booksAPIResult.id) {
+        book.shelf = booksAPIResult.shelf;
+        return;
+      }
+    }
   }
   render() {
     const { books } = this.state

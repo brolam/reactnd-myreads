@@ -11,7 +11,13 @@ BooksAPIMock.getAll = () => new Promise(function (then) {
 
 BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
   wasBooksApiUpdateCalled = {id:"nggnmAEACAAJ", shelf:"read"};
-  then(wasBooksApiUpdateCalled);
+  for( const book of books  ){
+    if ( book.id === wasBooksApiUpdateCalled.id){
+      book.shelf = wasBooksApiUpdateCalled.shelf;
+      then(wasBooksApiUpdateCalled);
+      return;
+    }
+  }
 });
 
 it('renders without crashing', () => {
@@ -45,12 +51,21 @@ test('renders 2 books per BookShelfList', () => {
 })
 
 test('Call BooksAPI Update method', () => {
+  const testChangeCurrentlyReadingToRead = (app) => {
+    app.update();
+    const shelfs = app.find('.bookshelf');
+    const shelfCurrentlyReading = shelfs.first();
+    const shelfRead = shelfs.at(2);
+    expect(shelfCurrentlyReading.find('.book').length).toEqual(1);
+    expect(shelfRead.find('.book').length).toEqual(3);
+  }
   const app = mount(<App booksAPI={BooksAPIMock} />);
   app.setState({ books: books });
   const bookShelfChanger = app.find('select [id="nggnmAEACAAJ"]'); //The Linux Command Line Book's
   bookShelfChanger.node.value = "read";
   bookShelfChanger.simulate('change');
   expect(wasBooksApiUpdateCalled).toEqual({id:"nggnmAEACAAJ", shelf:"read"});
+  testChangeCurrentlyReadingToRead(app);
 })
 
 const books = [{
