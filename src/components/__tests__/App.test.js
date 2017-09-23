@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom'
 import App from '../../App.js'
 import { mount } from 'enzyme';
 
+const SHELF_CURRENTLY_READING = 0;
+const SHELF_WANT_TO_READ = 1
+const SHELF_READ = 2;
+
 const BooksAPIMock = {}
 let wasBooksApiUpdateCalled = {};
 BooksAPIMock.getAll = () => new Promise(function (then) {
@@ -42,9 +46,9 @@ test('renders 2 books per BookShelfList', () => {
   const app = mount(<App booksAPI={BooksAPIMock} />);
   app.setState({ books: books });
   const shelves = app.find('.bookshelf');
-  const shelfCurrentlyReading = shelves.first();
-  const shelfWantToRead = shelves.at(1)
-  const shelfRead = shelves.at(2);
+  const shelfCurrentlyReading = shelves.at(SHELF_CURRENTLY_READING);
+  const shelfWantToRead = shelves.at(SHELF_WANT_TO_READ);
+  const shelfRead = shelves.at(SHELF_READ);
   expect(shelfCurrentlyReading.find('.book').length).toEqual(2);
   expect(shelfWantToRead.find('.book').length).toEqual(2);
   expect(shelfRead.find('.book').length).toEqual(2);
@@ -54,8 +58,8 @@ test('Call BooksAPI Update method', () => {
   const testChangeCurrentlyReadingToRead = (app) => {
     app.update();
     const shelves = app.find('.bookshelf');
-    const shelfCurrentlyReading = shelves.first();
-    const shelfRead = shelves.at(2);
+    const shelfCurrentlyReading = shelves.at(SHELF_CURRENTLY_READING);
+    const shelfRead = shelves.at(SHELF_READ);
     expect(shelfCurrentlyReading.find('.book').length).toEqual(1);
     expect(shelfRead.find('.book').length).toEqual(3);
   }
