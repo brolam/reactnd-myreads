@@ -17,20 +17,12 @@ class BooksApp extends React.Component {
     const bookId = e.target.id;
     const shelf = e.target.value;
     const book = { id: bookId };
-    this.props.booksAPI.update(book, shelf).then((result) => { this.doChangeBookShelf(result) });
-    this.updateAllShelves();
+    this.props.booksAPI.update(book, shelf).then((result) => { 
+      this.updateAllShelves(); 
+    });
   }
   getBooksOnTheShelf(shelf, books) {
     return books.filter((book) => (book.shelf === shelf))
-  }
-  doChangeBookShelf(booksAPIResult) {
-    const books = this.state.books;
-    for (const book of books) {
-      if (book.id === booksAPIResult.id) {
-        book.shelf = booksAPIResult.shelf;
-        return;
-      }
-    }
   }
   render() {
     const { books } = this.state
