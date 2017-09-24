@@ -1,12 +1,14 @@
 import React from 'react'
 import './App.css'
-import BookShelfList from './components/BookShelfList.js';
+import BookShelves from './components/BookShelves.js';
 import BookSearch from './components/BookSearch.js';
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
+  GO_HOME = '/';
+  GO_TO_SHEARCH = '/search';
   state = {
-    books: [],
-    showSearchPage: false
+    books: []
   }
   updateAllShelves() {
     this.props.booksAPI.getAll().then((books) => { this.setState({ books }) })
@@ -18,36 +20,25 @@ class BooksApp extends React.Component {
     const bookId = e.target.id;
     const shelf = e.target.value;
     const book = { id: bookId };
-    this.props.booksAPI.update(book, shelf).then((result) => { 
-      this.updateAllShelves(); 
+    this.props.booksAPI.update(book, shelf).then((result) => {
+      this.updateAllShelves();
     });
   }
-  getBooksOnTheShelf(shelf, books) {
-    return books.filter((book) => (book.shelf === shelf))
+  getBooksOnTheShelf = (shelf) => {
+    return this.state.books.filter((book) => (book.shelf === shelf))
   }
+
   render() {
-    const { books } = this.state
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <BookSearch/>
-        ) : (
-            <div className="list-books">
-              <div className="list-books-title">
-                <h1>MyReads</h1>
-              </div>
-              <div className="list-books-content">
-                <div>
-                  <BookShelfList listTitle="Currently Readin" books={this.getBooksOnTheShelf('currentlyReading', books)} onChangeBookShelf={this.onChangeBookShelf} />
-                  <BookShelfList listTitle="Want to Read" books={this.getBooksOnTheShelf('wantToRead', books)} onChangeBookShelf={this.onChangeBookShelf} />
-                  <BookShelfList listTitle="Read" books={this.getBooksOnTheShelf('read', books)} onChangeBookShelf={this.onChangeBookShelf} />
-                </div>
-              </div>
-              <div className="open-search">
-                <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-              </div>
-            </div>
-          )}
+        <Route exact path={this.GO_TO_SHEARCH} render={({ history }) => (
+          <BookSearch goHome={() => { history.push(this.GO_HOME) }} />)}/>
+        <Route exact path={this.GO_HOME} render={({ history }) => (
+          <BookShelves
+            onChangeBookShelf={this.onChangeBookShelf}
+            getBooksOnTheShelf={this.getBooksOnTheShelf}
+            goToSearch={() => { history.push(this.GO_TO_SHEARCH) }}
+          />)} />
       </div>
     )
   }

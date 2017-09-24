@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 function BookSearch(props) {
     return (
         <div className="search-books">
             <div className="search-books-bar">
-                <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+                <a id="closeSearchButton" className="close-search" onClick={() => { props.goHome()}}>Close</a>
                 <div className="search-books-input-wrapper">
                     {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -23,6 +24,10 @@ function BookSearch(props) {
             </div>
         </div>
     );
+}
+
+BookSearch.propTypes = {
+    goHome: PropTypes.func.isRequired,
 }
 
 export default BookSearch

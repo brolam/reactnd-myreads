@@ -8,7 +8,7 @@ test('renders without crashing', () => {
     ReactDOM.render(<BookShelfImage bookId="nggnmAEACAA" />, div)
 })
 
-test('renders without crashing', () => {
+test('Last Snapshot', () => {
     const bookShelfImage = renderer.create(
         <BookShelfImage bookId="nggnmAEACAA" />
       );

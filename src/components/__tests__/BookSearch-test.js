@@ -5,5 +5,5 @@ import renderer from 'react-test-renderer';
 
 test('renders without crashing', () => {
     const div = document.createElement('div')
-    ReactDOM.render(<BookSearch/>, div)
+    ReactDOM.render(<BookSearch goHome={() => {}} />, div)
 })

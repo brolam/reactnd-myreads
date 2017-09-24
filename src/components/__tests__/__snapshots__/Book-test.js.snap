@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Last Snapshot 1`] = `
+<li>
+  <div
+    className="book"
+  >
+    <div
+      className="book-top"
+    >
+      <div
+        className="book-cover"
+        style={
+          Object {
+            "backgroundImage": "url(\\"https://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=1\\")",
+            "height": 190,
+            "width": 120,
+          }
+        }
+      />
+      <div
+        className="book-shelf-changer"
+      >
+        <select
+          id="nggnmAEACAAJ"
+          onChange={[Function]}
+          value="currentlyReading"
+        >
+          <option
+            disabled={true}
+            value="none"
+          >
+            Move to...
+          </option>
+          <option
+            value="currentlyReading"
+          >
+            Currently Reading
+          </option>
+          <option
+            value="wantToRead"
+          >
+            Want to Read
+          </option>
+          <option
+            value="read"
+          >
+            Read
+          </option>
+          <option
+            value="none"
+          >
+            None
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="book-title"
+    >
+      The Linux Command Line
+    </div>
+    <div
+      className="book-authors"
+    >
+      William E. Shotts, 
+      Breno Marques 
+    </div>
+  </div>
+</li>
+`;

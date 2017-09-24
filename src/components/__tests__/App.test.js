@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../../App.js'
 import { mount } from 'enzyme';
+import {BrowserRouter} from 'react-router-dom'
 
 const SHELF_CURRENTLY_READING = 0;
 const SHELF_WANT_TO_READ = 1
@@ -24,27 +25,30 @@ BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
   }
 });
 
+let app;
+
+beforeEach(() => {
+  app = mount(<BrowserRouter><App booksAPI={BooksAPIMock} /></BrowserRouter>);
+  app.setState({ books: books });
+});
+
 it('renders without crashing', () => {
   const div = document.createElement('div')
-  ReactDOM.render(<App booksAPI={BooksAPIMock} />, div)
+  ReactDOM.render(<BrowserRouter><App booksAPI={BooksAPIMock} /></BrowserRouter>, div)
 })
 
 test('renders 3 list of bookshelf', () => {
-  const app = mount(<App booksAPI={BooksAPIMock} />);
   const innerNode = app.find('.bookshelf');
   expect(innerNode.length).toEqual(3);
 })
 
 test('renders 6 books', () => {
-  const app = mount(<App booksAPI={BooksAPIMock} />);
   app.setState({ books: books });
   const innerNode = app.find('.book');
   expect(innerNode.length).toEqual(6);
 })
 
 test('renders 2 books per BookShelfList', () => {
-  const app = mount(<App booksAPI={BooksAPIMock} />);
-  app.setState({ books: books });
   const shelves = app.find('.bookshelf');
   const shelfCurrentlyReading = shelves.at(SHELF_CURRENTLY_READING);
   const shelfWantToRead = shelves.at(SHELF_WANT_TO_READ);
@@ -63,13 +67,30 @@ test('Call BooksAPI Update method', () => {
     expect(shelfCurrentlyReading.find('.book').length).toEqual(1);
     expect(shelfRead.find('.book').length).toEqual(3);
   }
-  const app = mount(<App booksAPI={BooksAPIMock} />);
-  app.setState({ books: books });
   const bookShelfChanger = app.find('select [id="nggnmAEACAAJ"]'); //The Linux Command Line Book's
   bookShelfChanger.node.value = "read";
   bookShelfChanger.simulate('change');
   expect(wasBooksApiUpdateCalled).toEqual({id:"nggnmAEACAAJ", shelf:"read"});
   testChangeCurrentlyReadingToRead(app);
+})
+
+test('Show and Close search books', () => {
+  const testWasShowBookSearch = (app) => {
+    expect(app.find('.search-books').length).toEqual(1);
+    expect(app.find('.bookshelf').length).toEqual(0);
+  }
+  const testWasCloseBookSearch = (app) => {
+    expect(app.find('.search-books').length).toEqual(0);
+    expect(app.find('.bookshelf').length).toEqual(3);
+  }
+  const searchButton = app.find('a [id="searchButton"]');
+  expect(searchButton.length).toEqual(1);
+  searchButton.simulate('click');
+  testWasShowBookSearch(app);
+  const closeSearchButton = app.find('a [id="closeSearchButton"]');
+  expect(closeSearchButton.length).toEqual(1);
+  closeSearchButton.simulate('click');
+  testWasCloseBookSearch(app);
 })
 
 const books = [{
