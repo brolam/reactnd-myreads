@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import BookShelfChanger from './BookShelfChanger.js';
-import BookShelfImage from './BookShelfImage.js';
+import BookImage from './BookImage.js';
 
 class Book extends React.Component {
     render() {
@@ -10,7 +10,7 @@ class Book extends React.Component {
             <li>
                 <div className="book">
                     <div className="book-top">
-                        <BookShelfImage bookId={book.id} />
+                        <BookImage bookId={book.id} />
                         <BookShelfChanger bookId={book.id} selectedOption={book.shelf} onChangeBookShelf={onChangeBookShelf} />
                     </div>
                     <div className="book-title">{book.title}</div>
