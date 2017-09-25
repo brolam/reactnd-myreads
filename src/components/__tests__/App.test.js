@@ -77,7 +77,7 @@ test('Call BooksAPI Update method', () => {
 test('Show and Close search books', () => {
   const testWasShowBookSearch = (app) => {
     expect(app.find('.search-books').length).toEqual(1);
-    expect(app.find('.bookshelf').length).toEqual(0);
+    expect(app.find('.bookshelf').length).toEqual(1);
   }
   const testWasCloseBookSearch = (app) => {
     expect(app.find('.search-books').length).toEqual(0);

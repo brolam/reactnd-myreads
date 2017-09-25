@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import BookShelf from './BookShelf.js';
 
 function BookSearch(props) {
     return (
@@ -20,7 +21,7 @@ function BookSearch(props) {
                 </div>
             </div>
             <div className="search-books-results">
-                <ol className="books-grid"></ol>
+                <BookShelf shelfTitle="Results" books={[]} onChangeBookShelf={props.onChangeBookShelf} />
             </div>
         </div>
     );
@@ -28,6 +29,7 @@ function BookSearch(props) {
 
 BookSearch.propTypes = {
     goHome: PropTypes.func.isRequired,
+    onChangeBookShelf: PropTypes.func.isRequired,
 }
 
 export default BookSearch
