@@ -3,27 +3,25 @@ import PropTypes from 'prop-types'
 import BookShelfChanger from './BookShelfChanger.js';
 import BookImage from './BookImage.js';
 
-class Book extends React.Component {
-    render() {
-        const { book, onChangeBookShelf } = this.props
-        return (
-            <li>
-                <div className="book">
-                    <div className="book-top">
-                        <BookImage bookId={book.id} />
-                        <BookShelfChanger bookId={book.id} selectedOption={book.shelf} onChangeBookShelf={onChangeBookShelf} />
-                    </div>
-                    <div className="book-title">{book.title}</div>
-                    <div className="book-authors">
-                        {book.authors.map(function callback(author, index, authors) {
-                            const separated = index > 0 ? '' : ','
-                            return `${author}${separated} `
-                        })}
-                    </div>
+function Book(props) {
+    const { book, onChangeBookShelf } = props
+    return (
+        <li>
+            <div className="book">
+                <div className="book-top">
+                    <BookImage bookId={book.id} />
+                    <BookShelfChanger bookId={book.id} selectedOption={book.shelf} onChangeBookShelf={onChangeBookShelf} />
                 </div>
-            </li>
-        );
-    }
+                <div className="book-title">{book.title}</div>
+                <div className="book-authors">
+                    {book.authors.map(function callback(author, index, authors) {
+                        const separated = index > 0 ? '' : ','
+                        return `${author}${separated} `
+                    })}
+                </div>
+            </div>
+        </li>
+    );
 }
 
 Book.propTypes = {
