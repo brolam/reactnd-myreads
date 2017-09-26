@@ -16,19 +16,21 @@ function BookSearch(props) {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                    <input type="text" placeholder="Search by title or author" />
+                    <input type="text" placeholder="Search by title or author" onChange={(e) =>{ props.search(e.target.value);}} />
 
                 </div>
             </div>
             <div className="search-books-results">
-                <BookShelf shelfTitle="Results" books={[]} onChangeBookShelf={props.onChangeBookShelf} />
+                <BookShelf shelfTitle="Results" books={props.booksFound} onChangeBookShelf={props.onChangeBookShelf} />
             </div>
         </div>
     );
 }
 
 BookSearch.propTypes = {
+    booksFound: PropTypes.array.isRequired,
     goHome: PropTypes.func.isRequired,
+    search: PropTypes.func.isRequired,
     onChangeBookShelf: PropTypes.func.isRequired,
 }
 

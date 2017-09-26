@@ -28,12 +28,18 @@ class BooksApp extends React.Component {
     return this.state.books.filter((book) => (book.shelf === shelf))
   }
 
+  search = (query) => new Promise(function (then) {
+    then([]);
+});
+
   render() {
     return (
       <div className="app">
         <Route exact path={this.GO_TO_SHEARCH} render={({ history }) => (
           <BookSearch 
+          booksFound={this.state.books}
           goHome={() => { history.push(this.GO_HOME) }} 
+          search={this.search}
           onChangeBookShelf={this.onChangeBookShelf} 
           />)}
         />
