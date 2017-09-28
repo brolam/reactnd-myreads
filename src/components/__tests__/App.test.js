@@ -101,11 +101,18 @@ test('Show and Close search books', () => {
 })
 
 test('Search three books', () => {
+  const testSearchWithEmptyQueryValue = () => {
+    query.node.value = '';
+    query.simulate('change');
+    expect(app.find('.book').length).toEqual(0);
+  }
   const searchButton = app.find('a [id="searchButton"]');
   searchButton.simulate('click');
-  app.find('input').node.value = 'The';
-  app.find('input').simulate('change');
+  const query = app.find('input');
+  query.node.value = 'The';
+  query.simulate('change');
   expect(app.find('.bookshelf').length).toEqual(1);
+  testSearchWithEmptyQueryValue();
 })
 
 const books = [{
