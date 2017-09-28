@@ -13,7 +13,6 @@ let wasBooksApiUpdateCalled = {};
 BooksAPIMock.getAll = () => new Promise(function (then) {
   then(books);
 });
-
 BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
   wasBooksApiUpdateCalled = {id:"nggnmAEACAAJ", shelf:"read"};
   for( const book of books  ){
@@ -23,6 +22,10 @@ BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
       return;
     }
   }
+});
+BooksAPIMock.search = (query, maxResults) => new Promise(function (then) {
+  const booksFound = books.filter((book) => (book.title.indexOf(query) > -1));
+  then(booksFound);
 });
 
 let app;
@@ -83,14 +86,26 @@ test('Show and Close search books', () => {
     expect(app.find('.search-books').length).toEqual(0);
     expect(app.find('.bookshelf').length).toEqual(3);
   }
+  const testEmptyShelf = (app) => {
+    expect(app.find('.book').length).toEqual(0);
+  }
   const searchButton = app.find('a [id="searchButton"]');
   expect(searchButton.length).toEqual(1);
   searchButton.simulate('click');
   testWasShowBookSearch(app);
+  testEmptyShelf(app);
   const closeSearchButton = app.find('a [id="closeSearchButton"]');
   expect(closeSearchButton.length).toEqual(1);
   closeSearchButton.simulate('click');
   testWasCloseBookSearch(app);
+})
+
+test('Search three books', () => {
+  const searchButton = app.find('a [id="searchButton"]');
+  searchButton.simulate('click');
+  app.find('input').node.value = 'The';
+  app.find('input').simulate('change');
+  expect(app.find('.bookshelf').length).toEqual(1);
 })
 
 const books = [{
@@ -128,5 +143,11 @@ const books = [{
   title: "The Hobbit",
   authors: ["J.K. Rowlingh", "Breno Marques"],
   shelf: "read"
+},
+{
+  id: "brenoNyKyi8C",
+  title: "The Breno",
+  authors: ["Breno Marques"],
+  shelf: "none"
 }
 ]

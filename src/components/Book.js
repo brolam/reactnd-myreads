@@ -13,12 +13,7 @@ function Book(props) {
                     <BookShelfChanger bookId={book.id} selectedOption={book.shelf} onChangeBookShelf={onChangeBookShelf} />
                 </div>
                 <div className="book-title">{book.title}</div>
-                <div className="book-authors">
-                    {book.authors.map(function callback(author, index, authors) {
-                        const separated = index > 0 ? '' : ','
-                        return `${author}${separated} `
-                    })}
-                </div>
+                <div className="book-authors">{book.authors.join(', ')}</div>
             </div>
         </li>
     );
@@ -32,6 +27,10 @@ Book.propTypes = {
         shelf: PropTypes.string.isRequired,
     }),
     onChangeBookShelf: PropTypes.func.isRequired
+}
+
+export const isBookObject = (book) =>{
+    return (book.id && book.title && book.authors)?true:false;
 }
 
 export default Book

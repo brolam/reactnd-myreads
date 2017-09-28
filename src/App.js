@@ -2,13 +2,16 @@ import React from 'react'
 import './App.css'
 import BookShelves from './components/BookShelves.js';
 import BookSearch from './components/BookSearch.js';
+import {isBookObject} from './components/Book.js';
+import {parseBookShelf} from './components/BookShelfChanger.js';
 import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   GO_HOME = '/';
   GO_TO_SHEARCH = '/search';
   state = {
-    books: []
+    books: [],
+    booksFound:[]
   }
   updateAllShelves() {
     this.props.booksAPI.getAll().then((books) => { this.setState({ books }) })
@@ -27,17 +30,24 @@ class BooksApp extends React.Component {
   getBooksOnTheShelf = (shelf) => {
     return this.state.books.filter((book) => (book.shelf === shelf))
   }
-
-  search = (query) => new Promise(function (then) {
-    then([]);
-});
-
+  search = (query) => {
+    if (query === '') return;
+    this.props.booksAPI.search(query, 20).then((result) => {
+      if (Array.isArray(result)) {
+        const booksFound = result.filter((book) => {
+          parseBookShelf(this.state.books, book);
+          return isBookObject(book);
+        });
+        this.setState({ booksFound });
+      }
+    });
+  };
   render() {
     return (
       <div className="app">
         <Route exact path={this.GO_TO_SHEARCH} render={({ history }) => (
           <BookSearch 
-          booksFound={this.state.books}
+          booksFound={this.state.booksFound}
           goHome={() => { history.push(this.GO_HOME) }} 
           search={this.search}
           onChangeBookShelf={this.onChangeBookShelf} 

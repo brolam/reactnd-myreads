@@ -28,7 +28,7 @@ exports[`Last Snapshot 1`] = `
         >
           <option
             disabled={true}
-            value="none"
+            value=""
           >
             Move to...
           </option>
@@ -63,8 +63,7 @@ exports[`Last Snapshot 1`] = `
     <div
       className="book-authors"
     >
-      William E. Shotts, 
-      Breno Marques 
+      William E. Shotts, Breno Marques
     </div>
   </div>
 </li>

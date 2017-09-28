@@ -11,7 +11,7 @@ exports[`Last Snapshot 1`] = `
   >
     <option
       disabled={true}
-      value="none"
+      value=""
     >
       Move to...
     </option>
