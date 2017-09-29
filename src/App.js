@@ -13,18 +13,32 @@ class BooksApp extends React.Component {
     books: [],
     booksFound:[]
   }
-  updateAllShelves() {
+  syncAllShelves() {
     this.props.booksAPI.getAll().then((books) => { this.setState({ books }) })
   }
+  udateAllBooksShelfInCache(bookId, newShelf){
+    const addBookIfNotExist = () =>{
+      if ( (bookFound) && !(bookOnTheShelf)){
+        books.push(bookFound);
+      }
+    }
+    const {books , booksFound } = this.state;
+    const bookOnTheShelf = books.find(({ id }) => id === bookId);
+    const bookFound = booksFound.find(({ id }) => id === bookId);
+    if ( bookOnTheShelf ) bookOnTheShelf.shelf = newShelf;
+    if ( bookFound) bookFound.shelf = newShelf;
+    addBookIfNotExist();
+    this.forceUpdate();
+  }
   componentDidMount() {
-    this.updateAllShelves();
+    this.syncAllShelves();
   }
   onChangeBookShelf = (e) => {
     const bookId = e.target.id;
     const shelf = e.target.value;
     const book = { id: bookId };
     this.props.booksAPI.update(book, shelf).then((result) => {
-      this.updateAllShelves();
+      this.udateAllBooksShelfInCache(bookId, shelf);
     });
   }
   getBooksOnTheShelf = (shelf) => {
