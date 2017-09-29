@@ -1,5 +1,6 @@
 import React from 'react';
 import Book from '../Book.js';
+import {isBookObject} from '../Book.js';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 
@@ -23,4 +24,20 @@ test('Last Snapshot', () => {
     );
     let tree = book.toJSON();
     expect(tree).toMatchSnapshot();
+})
+
+test('It is a book object', () => {
+    let aBookObject = {
+        id: "PGR2AwAAQBAJ",
+        title: "To Kill a Mockingbird",
+        authors: ["Harper Lee", "Breno Marques"],
+        shelf: "currentlyReading"
+      }
+    expect(isBookObject(aBookObject)).toEqual(true);
+})
+
+test('It is not a book object', () => {
+    expect(isBookObject({id: "*",title: "*"})).toEqual(false);
+    expect(isBookObject({id: "*",authors: []})).toEqual(false);
+    expect(isBookObject({title: "*",authors: []})).toEqual(false);
 })
