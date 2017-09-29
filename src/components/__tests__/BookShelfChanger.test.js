@@ -1,5 +1,6 @@
 import React from 'react';
-import BookShelfChanger from '../BookShelfChanger.js';
+import BookShelfChanger  from '../BookShelfChanger.js';
+import {parseBookShelf}  from '../BookShelfChanger.js';
 import { mount } from 'enzyme';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
@@ -60,3 +61,22 @@ test('Last Snapshot', () => {
     let tree = bookShelfChanger.toJSON();
     expect(tree).toMatchSnapshot();
 })
+
+test('Parse Book on the Shelf but with shelf not defined', () => {
+    let bookOnTheShelf = {id: "nggnmAEACAAJ" };
+    parseBookShelf(books, bookOnTheShelf);
+    expect(bookOnTheShelf.shelf).toEqual('currentlyReading');
+})
+
+test('Parse Book with the shelf not defined', () => {
+    let bookWithoutShelf = {id: "XXXXXXXX" };
+    parseBookShelf(books, bookWithoutShelf);
+    expect(bookWithoutShelf.shelf).toEqual('none');
+})
+
+const books = [{
+    id: "nggnmAEACAAJ",
+    shelf: "currentlyReading"
+  },
+]
+  
