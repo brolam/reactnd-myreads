@@ -32,7 +32,6 @@ let app;
 
 beforeEach(() => {
   app = mount(<BrowserRouter><App booksAPI={BooksAPIMock} /></BrowserRouter>);
-  app.setState({ books: books });
 });
 
 it('renders without crashing', () => {
