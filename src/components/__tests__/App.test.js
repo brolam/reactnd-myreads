@@ -38,23 +38,23 @@ beforeEach(() => {
   app = mount(<BrowserRouter><App booksAPI={BooksAPIMock} /></BrowserRouter>);
 });
 
-it('renders without crashing', () => {
+it('Renders without crashing', () => {
   const div = document.createElement('div')
   ReactDOM.render(<BrowserRouter><App booksAPI={BooksAPIMock} /></BrowserRouter>, div)
 })
 
-test('renders 3 list of bookshelf', () => {
+test('Renders 3 list of bookshelf', () => {
   const innerNode = app.find('.bookshelf');
   expect(innerNode.length).toEqual(3);
 })
 
-test('renders 6 books', () => {
+test('Renders 6 books', () => {
   app.setState({ books: books });
   const innerNode = app.find('.book');
   expect(innerNode.length).toEqual(6);
 })
 
-test('renders 2 books per BookShelfList', () => {
+test('Renders 2 books per BookShelfList', () => {
   const shelves = app.find('.bookshelf');
   const shelfCurrentlyReading = shelves.at(SHELF_CURRENTLY_READING);
   const shelfWantToRead = shelves.at(SHELF_WANT_TO_READ);
@@ -80,7 +80,7 @@ test('Call BooksAPI Update method', () => {
   testChangeCurrentlyReadingToRead(app);
 })
 
-test('Show and Close search books', () => {
+test('Show and close search books', () => {
   const testWasShowBookSearch = (app) => {
     expect(app.find('.search-books').length).toEqual(1);
     expect(app.find('.bookshelf').length).toEqual(1);
@@ -92,36 +92,45 @@ test('Show and Close search books', () => {
   const testEmptyShelf = (app) => {
     expect(app.find('.book').length).toEqual(0);
   }
-  const searchButton = app.find('a [id="searchButton"]');
-  expect(searchButton.length).toEqual(1);
-  searchButton.simulate('click');
+  const showSearch = (app) =>{
+    const searchButton = app.find('a [id="searchButton"]');
+    expect(searchButton.length).toEqual(1);
+    searchButton.simulate('click');
+  }
+  const closeSearch = (app) => {
+    const closeSearchButton = app.find('a [id="closeSearchButton"]');
+    expect(closeSearchButton.length).toEqual(1);
+    closeSearchButton.simulate('click');
+  }
+  showSearch(app);
   testWasShowBookSearch(app);
   testEmptyShelf(app);
-  const closeSearchButton = app.find('a [id="closeSearchButton"]');
-  expect(closeSearchButton.length).toEqual(1);
-  closeSearchButton.simulate('click');
+  closeSearch(app);
   testWasCloseBookSearch(app);
 })
 
 test('Search three books', () => {
   const testSearchWithEmptyQueryValue = () => {
-    query.node.value = '';
-    query.simulate('change');
+    inputQuery.node.value = '';
+    inputQuery.simulate('change');
     expect(app.find('.book').length).toEqual(0);
   }
-  const testSearchWithErrorQuery = () => {
-    query.node.value = 'Error';
-    query.simulate('change');
+  const testSearchWithErrorQueryValue = () => {
+    inputQuery.node.value = 'Error';
+    inputQuery.simulate('change');
     expect(app.find('.book').length).toEqual(0);
+  }
+  const testSearchWithTheQueryValue = () => {
+    inputQuery.node.value = 'The';
+    inputQuery.simulate('change');
+    expect(app.find('.bookshelf').length).toEqual(1);
   }
   const searchButton = app.find('a [id="searchButton"]');
   searchButton.simulate('click');
-  const query = app.find('input');
-  query.node.value = 'The';
-  query.simulate('change');
-  expect(app.find('.bookshelf').length).toEqual(1);
+  const inputQuery = app.find('input');
+  testSearchWithTheQueryValue();
   testSearchWithEmptyQueryValue();
-  testSearchWithErrorQuery();
+  testSearchWithErrorQueryValue();
 })
 
 const books = [{
