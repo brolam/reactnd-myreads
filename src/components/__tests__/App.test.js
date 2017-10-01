@@ -24,6 +24,10 @@ BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
   }
 });
 BooksAPIMock.search = (query, maxResults) => new Promise(function (then) {
+  if ( query === 'Error'){
+    then('Error');
+    return;
+  }
   const booksFound = books.filter((book) => (book.title.indexOf(query) > -1));
   then(booksFound);
 });
@@ -105,6 +109,11 @@ test('Search three books', () => {
     query.simulate('change');
     expect(app.find('.book').length).toEqual(0);
   }
+  const testSearchWithErrorQuery = () => {
+    query.node.value = 'Error';
+    query.simulate('change');
+    expect(app.find('.book').length).toEqual(0);
+  }
   const searchButton = app.find('a [id="searchButton"]');
   searchButton.simulate('click');
   const query = app.find('input');
@@ -112,6 +121,7 @@ test('Search three books', () => {
   query.simulate('change');
   expect(app.find('.bookshelf').length).toEqual(1);
   testSearchWithEmptyQueryValue();
+  testSearchWithErrorQuery();
 })
 
 const books = [{
