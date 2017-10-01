@@ -16,20 +16,6 @@ class BooksApp extends React.Component {
   syncAllShelves() {
     this.props.booksAPI.getAll().then((books) => { this.setState({ books }) })
   }
-  udateAllBooksShelfInCache(bookId, newShelf){
-    const addBookIfNotExist = () =>{
-      if ( (bookFound) && !(bookOnTheShelf)){
-        books.push(bookFound);
-      }
-    }
-    const {books , booksFound } = this.state;
-    const bookOnTheShelf = books.find(({ id }) => id === bookId);
-    const bookFound = booksFound.find(({ id }) => id === bookId);
-    if ( bookOnTheShelf ) bookOnTheShelf.shelf = newShelf;
-    if ( bookFound) bookFound.shelf = newShelf;
-    addBookIfNotExist();
-    this.forceUpdate();
-  }
   componentDidMount() {
     this.syncAllShelves();
   }
@@ -38,21 +24,24 @@ class BooksApp extends React.Component {
     const shelf = e.target.value;
     const book = { id: bookId };
     this.props.booksAPI.update(book, shelf).then((result) => {
-      this.udateAllBooksShelfInCache(bookId, shelf);
+      this.syncAllShelves();
     });
   }
   getBooksOnTheShelf = (shelf) => {
     return this.state.books.filter((book) => (book.shelf === shelf))
   }
+  parseAllBooksFound(booksFound){
+    const parsedBooks = this.state.booksFound.filter((book) => {
+      parseBookShelf(this.state.books, book);
+      return isBookObject(book);
+    });
+    return parsedBooks;
+  }
   search = (query) => {
     if (query === '') return;
     this.props.booksAPI.search(query, 20).then((result) => {
       if (Array.isArray(result)) {
-        const booksFound = result.filter((book) => {
-          parseBookShelf(this.state.books, book);
-          return isBookObject(book);
-        });
-        this.setState({ booksFound });
+        this.setState({ booksFound: result });
       }
     });
   };
@@ -61,7 +50,7 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route exact path={this.GO_TO_SHEARCH} render={({ history }) => (
           <BookSearch 
-          booksFound={this.state.booksFound}
+          booksFound={this.parseAllBooksFound()}
           goHome={() => { history.push(this.GO_HOME) }} 
           search={this.search}
           onChangeBookShelf={this.onChangeBookShelf} 
