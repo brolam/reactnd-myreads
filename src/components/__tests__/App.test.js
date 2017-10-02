@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../../App.js'
 import { mount } from 'enzyme';
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 const SHELF_CURRENTLY_READING = 0;
 const SHELF_WANT_TO_READ = 1
@@ -14,9 +14,9 @@ BooksAPIMock.getAll = () => new Promise(function (then) {
   then(books);
 });
 BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
-  wasBooksApiUpdateCalled = {id:"nggnmAEACAAJ", shelf:"read"};
-  for( const book of books  ){
-    if ( book.id === wasBooksApiUpdateCalled.id){
+  wasBooksApiUpdateCalled = { id: "nggnmAEACAAJ", shelf: "read" };
+  for (const book of books) {
+    if (book.id === wasBooksApiUpdateCalled.id) {
       book.shelf = wasBooksApiUpdateCalled.shelf;
       then(wasBooksApiUpdateCalled);
       return;
@@ -24,7 +24,7 @@ BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
   }
 });
 BooksAPIMock.search = (query, maxResults) => new Promise(function (then) {
-  if ( query === 'Error'){
+  if (query === 'Error') {
     then('Error');
     return;
   }
@@ -76,7 +76,7 @@ test('Call BooksAPI Update method', () => {
   const bookShelfChanger = app.find('select [id="nggnmAEACAAJ"]'); //The Linux Command Line Book's
   bookShelfChanger.node.value = "read";
   bookShelfChanger.simulate('change');
-  expect(wasBooksApiUpdateCalled).toEqual({id:"nggnmAEACAAJ", shelf:"read"});
+  expect(wasBooksApiUpdateCalled).toEqual({ id: "nggnmAEACAAJ", shelf: "read" });
   testChangeCurrentlyReadingToRead(app);
 })
 
@@ -92,7 +92,7 @@ test('Show and close search books', () => {
   const testEmptyShelf = (app) => {
     expect(app.find('.book').length).toEqual(0);
   }
-  const showSearch = (app) =>{
+  const showSearch = (app) => {
     const searchButton = app.find('a [id="searchButton"]');
     expect(searchButton.length).toEqual(1);
     searchButton.simulate('click');

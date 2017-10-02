@@ -6,7 +6,7 @@ function BookSearch(props) {
     return (
         <div className="search-books">
             <div className="search-books-bar">
-                <a id="closeSearchButton" className="close-search" onClick={() => { props.goHome()}}>Close</a>
+                <a id="closeSearchButton" className="close-search" onClick={() => { props.goHome() }}>Close</a>
                 <div className="search-books-input-wrapper">
                     {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -16,7 +16,7 @@ function BookSearch(props) {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                    <input type="text" placeholder="Search by title or author" onChange={(e) =>{ props.search(e.target.value);}} />
+                    <input type="text" placeholder="Search by title or author" onChange={(e) => { props.search(e.target.value); }} />
 
                 </div>
             </div>

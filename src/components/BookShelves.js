@@ -26,7 +26,7 @@ function BookShelves(props) {
 BookShelves.propTypes = {
     getBooksOnTheShelf: PropTypes.func.isRequired,
     onChangeBookShelf: PropTypes.func.isRequired,
-    goToSearch:PropTypes.func.isRequired,
+    goToSearch: PropTypes.func.isRequired,
 }
 
 export default BookShelves

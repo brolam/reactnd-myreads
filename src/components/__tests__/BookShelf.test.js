@@ -8,26 +8,28 @@ const books = [{
     id: "nggnmAEACAAJ",
     title: "The Linux Command Line",
     authors: ["William E. Shotts", "Breno Marques"],
-    shelf: "currentlyReading"},
-    {
+    shelf: "currentlyReading"
+},
+{
     id: "PGR2AwAAQBAJ",
     title: "To Kill a Mockingbird",
     authors: ["Harper Lee", "Breno Marques"],
-    shelf: "currentlyReading"}
+    shelf: "currentlyReading"
+}
 ]
 
 const onChangeBookShelf = () => { }
 
-test('renders without crashing', () => {
+test('Renders without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(<BookShelf shelfTitle="Currently Readin" books={books} onChangeBookShelf={onChangeBookShelf} />, div)
 })
 
-test('renders 2 books', () => {
+test('Renders 2 books', () => {
     const bookShelf = mount(<BookShelf shelfTitle="Currently Readin" books={books} onChangeBookShelf={onChangeBookShelf} />);
     const booksOnTheShelf = bookShelf.find('.book');
     expect(booksOnTheShelf.length).toEqual(2);
-  })
+})
 
 test('Last Snapshot', () => {
     const bookShelf = renderer.create(

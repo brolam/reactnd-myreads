@@ -21,9 +21,9 @@ BookShelfChanger.propTypes = {
     onChangeBookShelf: PropTypes.func.isRequired
 }
 
-export const parseBookShelf = (books, book) =>{
+export const parseBookShelf = (books, book) => {
     const bookShelf = books.find(({ id }) => id === book.id)
-    book.shelf = bookShelf?bookShelf.shelf:'none';
+    book.shelf = bookShelf ? bookShelf.shelf : 'none';
 }
 
 export default BookShelfChanger

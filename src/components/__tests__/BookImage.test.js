@@ -3,7 +3,7 @@ import BookImage from '../BookImage.js';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 
-test('renders without crashing', () => {
+test('Renders without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(<BookImage bookId="nggnmAEACAA" />, div)
 })

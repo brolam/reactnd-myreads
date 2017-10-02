@@ -17,7 +17,7 @@ beforeEach(() => {
     bookSearch = mount(<BookSearch booksFound={[]} goHome={() => { }} search={search} onChangeBookShelf={onChangeBookShelf} />);
 });
 
-test('renders without crashing', () => {
+test('Renders without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(<BookSearch booksFound={[]} goHome={() => { }} search={search} onChangeBookShelf={onChangeBookShelf} />, div)
 })

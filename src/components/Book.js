@@ -29,8 +29,8 @@ Book.propTypes = {
     onChangeBookShelf: PropTypes.func.isRequired
 }
 
-export const isBookObject = (book) =>{
-    return (book.id && book.title && book.authors)?true:false;
+export const isBookObject = (book) => {
+    return (book.id && book.title && book.authors) ? true : false;
 }
 
 export default Book

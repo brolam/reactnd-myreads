@@ -2,8 +2,8 @@ import React from 'react'
 import './App.css'
 import BookShelves from './components/BookShelves.js';
 import BookSearch from './components/BookSearch.js';
-import {isBookObject} from './components/Book.js';
-import {parseBookShelf} from './components/BookShelfChanger.js';
+import { isBookObject } from './components/Book.js';
+import { parseBookShelf } from './components/BookShelfChanger.js';
 import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
@@ -11,7 +11,7 @@ class BooksApp extends React.Component {
   GO_TO_SHEARCH = '/search';
   state = {
     books: [],
-    booksFound:[]
+    booksFound: []
   }
   syncAllShelves() {
     this.props.booksAPI.getAll().then((books) => { this.setState({ books }) })
@@ -30,7 +30,7 @@ class BooksApp extends React.Component {
   getBooksOnTheShelf = (shelf) => {
     return this.state.books.filter((book) => (book.shelf === shelf))
   }
-  parseAllBooksFound(booksFound){
+  parseAllBooksFound(booksFound) {
     const parsedBooks = this.state.booksFound.filter((book) => {
       parseBookShelf(this.state.books, book);
       return isBookObject(book);
@@ -49,11 +49,11 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path={this.GO_TO_SHEARCH} render={({ history }) => (
-          <BookSearch 
-          booksFound={this.parseAllBooksFound()}
-          goHome={() => { history.push(this.GO_HOME) }} 
-          search={this.search}
-          onChangeBookShelf={this.onChangeBookShelf} 
+          <BookSearch
+            booksFound={this.parseAllBooksFound()}
+            goHome={() => { history.push(this.GO_HOME) }}
+            search={this.search}
+            onChangeBookShelf={this.onChangeBookShelf}
           />)}
         />
         <Route exact path={this.GO_HOME} render={({ history }) => (
@@ -61,7 +61,7 @@ class BooksApp extends React.Component {
             onChangeBookShelf={this.onChangeBookShelf}
             getBooksOnTheShelf={this.getBooksOnTheShelf}
             goToSearch={() => { history.push(this.GO_TO_SHEARCH) }}
-          />)} 
+          />)}
         />
       </div>
     )

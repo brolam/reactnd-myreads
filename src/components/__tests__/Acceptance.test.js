@@ -2,19 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../../App.js'
 import { mount } from 'enzyme';
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 const BooksAPIMock = {}
 BooksAPIMock.getAll = () => new Promise(function (then) {
   then(books);
 });
 BooksAPIMock.update = (book, shelf) => new Promise(function (then) {
-  let bookShelfChanged = book.id === "nggnmAEACAAJ"? books[0] : booksFound[0];
-  if ( bookShelfChanged.id === "new_book") books.push(bookShelfChanged);
-  if (bookShelfChanged){
+  let bookShelfChanged = book.id === "nggnmAEACAAJ" ? books[0] : booksFound[0];
+  if (bookShelfChanged.id === "new_book") books.push(bookShelfChanged);
+  if (bookShelfChanged) {
     bookShelfChanged.shelf = shelf;
-    then({id:book.id, shelf});
-  } 
+    then({ id: book.id, shelf });
+  }
 });
 
 let books = [{
@@ -56,7 +56,7 @@ describe('Change and add books on the shelves ', () => {
 
   it('Want to read a book', () => {
     const select = app.find('.book').find('select');
-    select.simulate('change',  { target: { id:'new_book', value: 'wantToRead' } });
+    select.simulate('change', { target: { id: 'new_book', value: 'wantToRead' } });
     app.update();
     expect(app.state().books[1].shelf).toEqual('wantToRead');
   })
