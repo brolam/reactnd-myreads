@@ -3,9 +3,10 @@ import BookShelves from '../BookShelves.js';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 
-
 const onChangeBookShelf = (e) => { }
-const getBooksOnTheShelf = (shelf) => { return books.filter((book) => (book.shelf === shelf)) }
+const getBooksOnTheShelf = shelf => {
+  return books.filter(book => book.shelf === shelf)
+}
 
 test('Renders without crashing', () => {
   const div = document.createElement('div')
