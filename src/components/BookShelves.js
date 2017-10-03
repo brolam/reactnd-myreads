@@ -11,13 +11,25 @@ function BookShelves(props) {
             </div>
             <div className="list-books-content">
                 <div>
-                    <BookShelf shelfTitle="Currently Readin" books={getBooksOnTheShelf('currentlyReading')} onChangeBookShelf={onChangeBookShelf} />
-                    <BookShelf shelfTitle="Want to Read" books={getBooksOnTheShelf('wantToRead')} onChangeBookShelf={onChangeBookShelf} />
-                    <BookShelf shelfTitle="Read" books={getBooksOnTheShelf('read')} onChangeBookShelf={onChangeBookShelf} />
+                    <BookShelf
+                        shelfTitle="Currently Readin"
+                        books={getBooksOnTheShelf('currentlyReading')}
+                        onChangeBookShelf={onChangeBookShelf}
+                    />
+                    <BookShelf
+                        shelfTitle="Want to Read"
+                        books={getBooksOnTheShelf('wantToRead')}
+                        onChangeBookShelf={onChangeBookShelf}
+                    />
+                    <BookShelf
+                        shelfTitle="Read"
+                        books={getBooksOnTheShelf('read')}
+                        onChangeBookShelf={onChangeBookShelf}
+                    />
                 </div>
             </div>
             <div className="open-search">
-                <a id="searchButton" onClick={() => { goToSearch() }}>Add a book</a>
+                <a id="searchButton" onClick={goToSearch}>Add a book</a>
             </div>
         </div>
     )
