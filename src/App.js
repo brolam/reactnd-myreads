@@ -9,16 +9,20 @@ import { Route } from 'react-router-dom'
 class BooksApp extends React.Component {
   GO_HOME = '/';
   GO_TO_SHEARCH = '/search';
+
   state = {
     books: [],
     booksFound: []
   }
+
   syncAllShelves() {
-    this.props.booksAPI.getAll().then((books) => { this.setState({ books }) })
+    this.props.booksAPI.getAll().then( books => this.setState({ books }))
   }
+
   componentDidMount() {
     this.syncAllShelves();
   }
+
   onChangeBookShelf = (e) => {
     const bookId = e.target.id;
     const shelf = e.target.value;
@@ -27,24 +31,28 @@ class BooksApp extends React.Component {
       this.syncAllShelves();
     });
   }
+
   getBooksOnTheShelf = (shelf) => {
-    return this.state.books.filter((book) => (book.shelf === shelf))
+    return this.state.books.filter( book => (book.shelf === shelf))
   }
+
   parseAllBooksFound(booksFound) {
-    const parsedBooks = this.state.booksFound.filter((book) => {
+    const parsedBooks = this.state.booksFound.filter( book => {
       parseBookShelf(this.state.books, book);
       return isBookObject(book);
     });
     return parsedBooks;
   }
+
   search = (query) => {
     if (query === '') return;
-    this.props.booksAPI.search(query, 20).then((result) => {
+    this.props.booksAPI.search(query, 20).then( result => {
       if (Array.isArray(result)) {
         this.setState({ booksFound: result });
       }
     });
   };
+
   render() {
     return (
       <div className="app">
