@@ -10,7 +10,11 @@ function Book(props) {
             <div className="book">
                 <div className="book-top">
                     <BookImage bookId={book.id} />
-                    <BookShelfChanger bookId={book.id} selectedOption={book.shelf} onChangeBookShelf={onChangeBookShelf} />
+                    <BookShelfChanger
+                        bookId={book.id}
+                        selectedOption={book.shelf}
+                        onChangeBookShelf={onChangeBookShelf}
+                    />
                 </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{book.authors.join(', ')}</div>
