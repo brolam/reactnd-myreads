@@ -4,7 +4,10 @@ import PropTypes from 'prop-types'
 function BookShelfChanger(props) {
     return (
         <div className="book-shelf-changer">
-            <select id={props.bookId} value={props.selectedOption} onChange={props.onChangeBookShelf} >
+            <select
+                id={props.bookId}
+                value={props.selectedOption}
+                onChange={props.onChangeBookShelf} >
                 <option value="" disabled >Move to...</option>
                 <option value="currentlyReading" >Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
